@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="liux" />
+
+
+
+<meta name="description" content="工具本地端(windows工作平台)
+git
+node.js云端(Centos阿里云)
+gogs
+nginx
+
+安装hexo1npm install hexo-cli -g
+hexo初始化及配置初始化项目文件夹blog123hexo init blogcd blognpm install
+安装相应插件1234npm install hexo-deployer-git --savenpm insta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo部署博客到github及云服务器">
+<meta property="og:url" content="http://www.51os.xyz/2017/02/04/hexo-full/index.html">
+<meta property="og:site_name" content="三人行">
+<meta property="og:description" content="工具本地端(windows工作平台)
+git
+node.js云端(Centos阿里云)
+gogs
+nginx
+
+安装hexo1npm install hexo-cli -g
+hexo初始化及配置初始化项目文件夹blog123hexo init blogcd blognpm install
+安装相应插件1234npm install hexo-deployer-git --savenpm insta">
+<meta property="og:updated_time" content="2017-02-04T12:53:11.309Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo部署博客到github及云服务器">
+<meta name="twitter:description" content="工具本地端(windows工作平台)
+git
+node.js云端(Centos阿里云)
+gogs
+nginx
+
+安装hexo1npm install hexo-cli -g
+hexo初始化及配置初始化项目文件夹blog123hexo init blogcd blognpm install
+安装相应插件1234npm install hexo-deployer-git --savenpm insta">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="三人行" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>hexo部署博客到github及云服务器 | 三人行</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/images/liux.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">liux</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">三人行，必有我师焉</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:lg970044@foxmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/lg970044" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gogs/">gogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/">screen</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/seafile/">seafile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源/">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">三人行，必有我师焉。择其善者而从之，其不善者而改之。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">liux</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/images/liux.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">liux</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">三人行，必有我师焉</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:lg970044@foxmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/lg970044" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-hexo-full" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/04/hexo-full/" class="article-date">
+      <time datetime="2017-02-04T07:40:16.000Z" itemprop="datePublished">2017-02-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hexo部署博客到github及云服务器
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/服务器/">服务器</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gogs/">gogs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源/">开源</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云/">阿里云</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><h3 id="本地端-windows工作平台"><a href="#本地端-windows工作平台" class="headerlink" title="本地端(windows工作平台)"></a>本地端(windows工作平台)</h3><ul>
+<li>git</li>
+<li>node.js<h3 id="云端-Centos阿里云"><a href="#云端-Centos阿里云" class="headerlink" title="云端(Centos阿里云)"></a>云端(Centos阿里云)</h3></li>
+<li>gogs</li>
+<li>nginx</li>
+</ul>
+<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure>
+<h2 id="hexo初始化及配置"><a href="#hexo初始化及配置" class="headerlink" title="hexo初始化及配置"></a>hexo初始化及配置</h2><h3 id="初始化项目文件夹blog"><a href="#初始化项目文件夹blog" class="headerlink" title="初始化项目文件夹blog"></a>初始化项目文件夹blog</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init blog</div><div class="line">cd blog</div><div class="line">npm install</div></pre></td></tr></table></figure>
+<h3 id="安装相应插件"><a href="#安装相应插件" class="headerlink" title="安装相应插件"></a>安装相应插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div><div class="line">npm install hexo-generator-feed --save</div><div class="line">npm install hexo-generator-search --save</div><div class="line">npm install hexo-generator-sitemap --save</div></pre></td></tr></table></figure>
+<h3 id="新建标签云、关于我、404页面"><a href="#新建标签云、关于我、404页面" class="headerlink" title="新建标签云、关于我、404页面"></a>新建标签云、关于我、404页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo new page tags</div><div class="line">hexo new page about</div><div class="line">hexo new page 404</div></pre></td></tr></table></figure>
+<h3 id="下载相应主题保存到-themes-文件夹中"><a href="#下载相应主题保存到-themes-文件夹中" class="headerlink" title="下载相应主题保存到/themes/文件夹中"></a>下载相应主题保存到/themes/文件夹中</h3><h3 id="修改站点和主题配置文件-config-yml"><a href="#修改站点和主题配置文件-config-yml" class="headerlink" title="修改站点和主题配置文件_config.yml"></a>修改站点和主题配置文件_config.yml</h3><h3 id="本地开启服务，查看博客-默认端口4000"><a href="#本地开启服务，查看博客-默认端口4000" class="headerlink" title="本地开启服务，查看博客(默认端口4000)"></a>本地开启服务，查看博客(默认端口4000)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s</div></pre></td></tr></table></figure>
+<h2 id="本地配置SSH-keys"><a href="#本地配置SSH-keys" class="headerlink" title="本地配置SSH keys"></a>本地配置SSH keys</h2><h3 id="检查是否已经存在SSH-keys"><a href="#检查是否已经存在SSH-keys" class="headerlink" title="检查是否已经存在SSH keys"></a>检查是否已经存在SSH keys</h3><p>在Git Bash输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls -al ~/.ssh</div></pre></td></tr></table></figure></p>
+<h3 id="创建SSH-keys-已存在略过"><a href="#创建SSH-keys-已存在略过" class="headerlink" title="创建SSH keys(已存在略过)"></a>创建SSH keys(已存在略过)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</div></pre></td></tr></table></figure>
+<h3 id="复制公钥内容"><a href="#复制公钥内容" class="headerlink" title="复制公钥内容"></a>复制公钥内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">clip &lt; ~/.ssh/id_rsa.pub</div></pre></td></tr></table></figure>
+<h2 id="github上部署"><a href="#github上部署" class="headerlink" title="github上部署"></a>github上部署</h2><h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p>登录github，创建 用户名.github.io 的Public项目。</p>
+<h3 id="配置SSH密钥"><a href="#配置SSH密钥" class="headerlink" title="配置SSH密钥"></a>配置SSH密钥</h3><p>把本地的公钥内容粘贴到Key框内</p>
+<h3 id="测试SSH密钥登录"><a href="#测试SSH密钥登录" class="headerlink" title="测试SSH密钥登录"></a>测试SSH密钥登录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure>
+<p>如果通过，返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hi xxx! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</div></pre></td></tr></table></figure></p>
+<h2 id="云服务器上部署"><a href="#云服务器上部署" class="headerlink" title="云服务器上部署"></a>云服务器上部署</h2><h3 id="创建项目-1"><a href="#创建项目-1" class="headerlink" title="创建项目"></a>创建项目</h3><p>登录gogs，创建项目。</p>
+<h3 id="设置项目的Git钩子"><a href="#设置项目的Git钩子" class="headerlink" title="设置项目的Git钩子"></a>设置项目的Git钩子</h3><p>设置Git钩子post-receive为(/home/wwwroot/blog为博客根目录)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">git --work-tree=/home/wwwroot/blog checkout -f</div></pre></td></tr></table></figure></p>
+<h3 id="设置git用户对博客根目录权限"><a href="#设置git用户对博客根目录权限" class="headerlink" title="设置git用户对博客根目录权限"></a>设置git用户对博客根目录权限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown -R git:git /home/wwwroot/blog</div></pre></td></tr></table></figure>
+<h3 id="配置SSH密钥-1"><a href="#配置SSH密钥-1" class="headerlink" title="配置SSH密钥"></a>配置SSH密钥</h3><p>把本地的公钥内容粘贴到密钥内容框内</p>
+<h3 id="测试SSH密钥登录-1"><a href="#测试SSH密钥登录-1" class="headerlink" title="测试SSH密钥登录"></a>测试SSH密钥登录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@git.xxxx.com</div></pre></td></tr></table></figure>
+<p>如果通过，返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hi there, You&apos;ve successfully authenticated, but Gogs does not provide shell access.</div></pre></td></tr></table></figure></p>
+<h2 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h2><h3 id="修改站点配置文件-config-yml"><a href="#修改站点配置文件-config-yml" class="headerlink" title="修改站点配置文件_config.yml"></a>修改站点配置文件_config.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo:</div><div class="line">    github: git@github.com:xxx/xxx.github.io.git</div><div class="line">    gogs: git@git.xxxx.com:xxx/blog.git</div></pre></td></tr></table></figure>
+<h3 id="执行生成及部署命令"><a href="#执行生成及部署命令" class="headerlink" title="执行生成及部署命令"></a>执行生成及部署命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d -g</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/02/04/hexo-full/">hexo部署博客到github及云服务器</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">liux</a></p>
+        <p><span>发布时间:</span>2017-02-04, 15:40:16</p>
+        <p><span>最后更新:</span>2017-02-04, 20:53:11</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/04/hexo-full/" title="hexo部署博客到github及云服务器">http://www.51os.xyz/2017/02/04/hexo-full/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.51os.xyz/2017/02/04/hexo-full/　　作者: liux" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/02/04/seafile/">
+                    开源网盘云存储 Seafile
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#工具"><span class="toc-number">1.</span> <span class="toc-text">工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本地端-windows工作平台"><span class="toc-number">1.1.</span> <span class="toc-text">本地端(windows工作平台)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#云端-Centos阿里云"><span class="toc-number">1.2.</span> <span class="toc-text">云端(Centos阿里云)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo"><span class="toc-number">2.</span> <span class="toc-text">安装hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo初始化及配置"><span class="toc-number">3.</span> <span class="toc-text">hexo初始化及配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化项目文件夹blog"><span class="toc-number">3.1.</span> <span class="toc-text">初始化项目文件夹blog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装相应插件"><span class="toc-number">3.2.</span> <span class="toc-text">安装相应插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建标签云、关于我、404页面"><span class="toc-number">3.3.</span> <span class="toc-text">新建标签云、关于我、404页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载相应主题保存到-themes-文件夹中"><span class="toc-number">3.4.</span> <span class="toc-text">下载相应主题保存到/themes/文件夹中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改站点和主题配置文件-config-yml"><span class="toc-number">3.5.</span> <span class="toc-text">修改站点和主题配置文件_config.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地开启服务，查看博客-默认端口4000"><span class="toc-number">3.6.</span> <span class="toc-text">本地开启服务，查看博客(默认端口4000)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地配置SSH-keys"><span class="toc-number">4.</span> <span class="toc-text">本地配置SSH keys</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#检查是否已经存在SSH-keys"><span class="toc-number">4.1.</span> <span class="toc-text">检查是否已经存在SSH keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建SSH-keys-已存在略过"><span class="toc-number">4.2.</span> <span class="toc-text">创建SSH keys(已存在略过)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制公钥内容"><span class="toc-number">4.3.</span> <span class="toc-text">复制公钥内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#github上部署"><span class="toc-number">5.</span> <span class="toc-text">github上部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建项目"><span class="toc-number">5.1.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置SSH密钥"><span class="toc-number">5.2.</span> <span class="toc-text">配置SSH密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试SSH密钥登录"><span class="toc-number">5.3.</span> <span class="toc-text">测试SSH密钥登录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#云服务器上部署"><span class="toc-number">6.</span> <span class="toc-text">云服务器上部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建项目-1"><span class="toc-number">6.1.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置项目的Git钩子"><span class="toc-number">6.2.</span> <span class="toc-text">设置项目的Git钩子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置git用户对博客根目录权限"><span class="toc-number">6.3.</span> <span class="toc-text">设置git用户对博客根目录权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置SSH密钥-1"><span class="toc-number">6.4.</span> <span class="toc-text">配置SSH密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试SSH密钥登录-1"><span class="toc-number">6.5.</span> <span class="toc-text">测试SSH密钥登录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地部署"><span class="toc-number">7.</span> <span class="toc-text">本地部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改站点配置文件-config-yml"><span class="toc-number">7.1.</span> <span class="toc-text">修改站点配置文件_config.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行生成及部署命令"><span class="toc-number">7.2.</span> <span class="toc-text">执行生成及部署命令</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"hexo部署博客到github及云服务器　| 三人行　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="changyan" id="comments">
+<!--PC和WAP自适应版-->
+<div id="SOHUCS" sid="2017/02/04/hexo-full/" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = 'cysPwTYoD'; 
+var conf = 'prod_e5a5368aad3b65864113c63a40571f0a'; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+</script>
+
+    <script> loadComment(); </script>
+
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/02/04/seafile/" title="下一篇: 开源网盘云存储 Seafile">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/hexo-full/">hexo部署博客到github及云服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/seafile/">开源网盘云存储 Seafile</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/screen/">SSH远程会话管理 - screen</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 liux
+            </div>
+            <div class="footer-right">
+                <a href="http://www.miibeian.gov.cn/" target="_blank">闽ICP备17001396号-1</a><i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
