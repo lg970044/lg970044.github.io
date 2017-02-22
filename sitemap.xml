@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.51os.xyz/2017/02/04/screen/</loc>
+    
+    <lastmod>2017-02-22T16:23:12.786Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.51os.xyz/2017/02/04/hexo-full/</loc>
+    
+    <lastmod>2017-02-22T16:22:57.233Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.51os.xyz/2017/02/22/lnmp-phps/</loc>
     
-    <lastmod>2017-02-22T16:01:55.734Z</lastmod>
+    <lastmod>2017-02-22T16:21:33.115Z</lastmod>
     
   </url>
   
@@ -26,20 +40,6 @@
     <loc>http://www.51os.xyz/about/index.html</loc>
     
     <lastmod>2017-02-04T14:28:16.191Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.51os.xyz/2017/02/04/hexo-full/</loc>
-    
-    <lastmod>2017-02-04T12:53:11.309Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.51os.xyz/2017/02/04/screen/</loc>
-    
-    <lastmod>2017-02-04T12:43:10.512Z</lastmod>
     
   </url>
   

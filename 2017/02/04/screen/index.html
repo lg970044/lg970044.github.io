@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://www.51os.xyz/2017/02/04/screen/index.html">
 <meta property="og:site_name" content="三人行">
 <meta property="og:description" content="背景SSH远程登录到Linux服务器，经常运行一些需要很长时间才能完成的任务。如果网络突然断开，或者其他情况导致不得不与远程SSH服务器链接断开，远程执行的命令会被杀掉，一切半途而废了。只要Screen本身没有终止，在其内部运行的会话都可以恢复。这一点对于远程登录的用户特别有用——即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行screen -r就可以恢复会话">
-<meta property="og:updated_time" content="2017-02-04T12:43:10.512Z">
+<meta property="og:updated_time" content="2017-02-22T16:23:12.786Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH远程会话管理 - screen">
 <meta name="twitter:description" content="背景SSH远程登录到Linux服务器，经常运行一些需要很长时间才能完成的任务。如果网络突然断开，或者其他情况导致不得不与远程SSH服务器链接断开，远程执行的命令会被杀掉，一切半途而废了。只要Screen本身没有终止，在其内部运行的会话都可以恢复。这一点对于远程登录的用户特别有用——即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行screen -r就可以恢复会话">
@@ -310,13 +310,13 @@
       
           
         <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>SSH远程登录到Linux服务器，经常运行一些需要很长时间才能完成的任务。如果网络突然断开，或者其他情况导致不得不与远程SSH服务器链接断开，远程执行的命令会被杀掉，一切半途而废了。<br>只要Screen本身没有终止，在其内部运行的会话都可以恢复。这一点对于远程登录的用户特别有用——即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行screen -r就可以恢复会话的运行。同样在暂时离开的时候，也可以执行分离命令detach，在保证里面的程序正常运行的情况下让Screen挂起（切换到后台）。</p>
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><h3 id="安装screen"><a href="#安装screen" class="headerlink" title="安装screen"></a>安装screen</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install screen</div></pre></td></tr></table></figure>
-<h3 id="创建会话"><a href="#创建会话" class="headerlink" title="创建会话"></a>创建会话</h3><p>创建名为test的会话<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">screen -S test</div></pre></td></tr></table></figure></p>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><h3 id="安装screen"><a href="#安装screen" class="headerlink" title="安装screen"></a>安装screen</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install screen</div></pre></td></tr></table></figure>
+<h3 id="创建会话"><a href="#创建会话" class="headerlink" title="创建会话"></a>创建会话</h3><p>创建名为test的会话<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">screen -S <span class="built_in">test</span></div></pre></td></tr></table></figure></p>
 <h3 id="暂时离开，保留会话"><a href="#暂时离开，保留会话" class="headerlink" title="暂时离开，保留会话"></a>暂时离开，保留会话</h3><p>当需要临时离开时（会话中的程序不会关闭，仍在运行）可以用快捷键Ctrl+a d(即按住Ctrl，依次再按a,d)</p>
-<h3 id="查看会话列表"><a href="#查看会话列表" class="headerlink" title="查看会话列表"></a>查看会话列表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">screen -ls</div></pre></td></tr></table></figure>
-<h3 id="恢复会话"><a href="#恢复会话" class="headerlink" title="恢复会话"></a>恢复会话</h3><p>恢复到名为test的会话<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">screen -r test</div></pre></td></tr></table></figure></p>
+<h3 id="查看会话列表"><a href="#查看会话列表" class="headerlink" title="查看会话列表"></a>查看会话列表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">screen -ls</div></pre></td></tr></table></figure>
+<h3 id="恢复会话"><a href="#恢复会话" class="headerlink" title="恢复会话"></a>恢复会话</h3><p>恢复到名为test的会话<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">screen -r <span class="built_in">test</span></div></pre></td></tr></table></figure></p>
 <h3 id="关闭会话"><a href="#关闭会话" class="headerlink" title="关闭会话"></a>关闭会话</h3><p>在当前会话中执行exit退出</p>
-<h3 id="远程演示"><a href="#远程演示" class="headerlink" title="远程演示"></a>远程演示</h3><p>观众屏幕上就会出现和演示者同步<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">screen -x test</div></pre></td></tr></table></figure></p>
+<h3 id="远程演示"><a href="#远程演示" class="headerlink" title="远程演示"></a>远程演示</h3><p>观众屏幕上就会出现和演示者同步<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">screen -x <span class="built_in">test</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -328,7 +328,7 @@
         <p><span>本文标题:</span><a href="/2017/02/04/screen/">SSH远程会话管理 - screen</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">liux</a></p>
         <p><span>发布时间:</span>2017-02-04, 10:49:33</p>
-        <p><span>最后更新:</span>2017-02-04, 20:43:10</p>
+        <p><span>最后更新:</span>2017-02-23, 00:23:12</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/02/04/screen/" title="SSH远程会话管理 - screen">http://www.51os.xyz/2017/02/04/screen/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.51os.xyz/2017/02/04/screen/　　作者: liux" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
