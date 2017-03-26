@@ -4,6 +4,17 @@
   
     
     <entry>
+      <title><![CDATA[跨域资源共享 CORS]]></title>
+      <url>http://www.51os.xyz/2017/03/26/cors/</url>
+      <content type="html"><![CDATA[<p>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。<br>它允许浏览器向跨域服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同域使用的限制。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。<br>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同域的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨域，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。<br>因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨域通信。实现非常简单，只需由服务器发送一个响应头即可。</p>
+<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">header(&quot;Access-Control-Allow-Origin: *&quot;);</div></pre></td></tr></table></figure>
+<h2 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h2><p>1.修改httpd.conf，启用头信息自定义模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LoadModule headers_module modules/mod_headers.so</div></pre></td></tr></table></figure></p>
+<p>2.修改虚拟主机配置，添加头信息到Directory内<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Header set Access-Control-Allow-Origin *</div></pre></td></tr></table></figure></p>
+<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location /</div><div class="line">&#123;</div><div class="line">    add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Centos LNMP一键安装包 安装多PHP版本]]></title>
       <url>http://www.51os.xyz/2017/02/22/lnmp-phps/</url>
       <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>PHP进入7时代，部分项目未兼容PHP7，所以在原PHP5.4的版本上，新安装PHP7，实现php7和php5共存。</p>

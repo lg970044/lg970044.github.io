@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.51os.xyz/"/>
-  <updated>2017-02-22T16:21:33.115Z</updated>
+  <updated>2017-03-26T16:03:29.871Z</updated>
   <id>http://www.51os.xyz/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>跨域资源共享 CORS</title>
+    <link href="http://www.51os.xyz/2017/03/26/cors/"/>
+    <id>http://www.51os.xyz/2017/03/26/cors/</id>
+    <published>2017-03-26T08:48:22.000Z</published>
+    <updated>2017-03-26T16:03:29.871Z</updated>
+    
+    <content type="html"><![CDATA[<p>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。<br>它允许浏览器向跨域服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同域使用的限制。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。<br>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同域的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨域，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。<br>因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨域通信。实现非常简单，只需由服务器发送一个响应头即可。</p>
+<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">header(&quot;Access-Control-Allow-Origin: *&quot;);</div></pre></td></tr></table></figure>
+<h2 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h2><p>1.修改httpd.conf，启用头信息自定义模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LoadModule headers_module modules/mod_headers.so</div></pre></td></tr></table></figure></p>
+<p>2.修改虚拟主机配置，添加头信息到Directory内<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Header set Access-Control-Allow-Origin *</div></pre></td></tr></table></figure></p>
+<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location /</div><div class="line">&#123;</div><div class="line">    add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）。&lt;br&gt;它允许浏览器向跨域服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同域使用的限制。&lt;/p&gt;
+&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;
+    
+    </summary>
+    
+      <category term="服务器" scheme="http://www.51os.xyz/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="cors" scheme="http://www.51os.xyz/tags/cors/"/>
+    
+      <category term="apache" scheme="http://www.51os.xyz/tags/apache/"/>
+    
+      <category term="nginx" scheme="http://www.51os.xyz/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>Centos LNMP一键安装包 安装多PHP版本</title>
