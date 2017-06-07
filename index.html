@@ -305,6 +305,11 @@
 <h2 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ionic cordova build android</div></pre></td></tr></table></figure>
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>模拟器运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ionic cordova <span class="built_in">emulate</span> android</div></pre></td></tr></table></figure></p>
 <p>手机运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ionic cordova run android</div></pre></td></tr></table></figure></p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>删除调试插件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ionic cordova plugin rm org.apache.cordova.console</div></pre></td></tr></table></figure></p>
+<p>生成apk<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ionic cordova build android --release</div></pre></td></tr></table></figure></p>
+<p>生成证书<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">keytool -genkey -v -keystore xiahe.keystore -alias xiahe.keystore -keyalg RSA -keysize 2048 -validity 20000</div></pre></td></tr></table></figure></p>
+<p>apk签名<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jarsigner -verbose -digestalg SHA1 -sigalg SHA256withRSA -keystore xiahe.keystore -signedjar android-release-signed.apk android-release-unsigned.apk xiahe.keystore</div></pre></td></tr></table></figure></p>
+<p>zipalign优化已签名apk<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zipalign -v 4 android-release-signed.apk xiahe-erp.apk</div></pre></td></tr></table></figure></p>
 
       
     </div>
