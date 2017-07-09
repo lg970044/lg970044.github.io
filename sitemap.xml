@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.51os.xyz/2017/06/08/discuz-uc-key-bug/</loc>
+    
+    <lastmod>2017-07-09T09:10:55.599Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.51os.xyz/2017/07/09/lnmp-phps/</loc>
+    
+    <lastmod>2017-07-09T08:33:11.341Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.51os.xyz/2017/06/04/ionic/</loc>
     
     <lastmod>2017-06-07T14:49:47.708Z</lastmod>
@@ -26,13 +40,6 @@
     <loc>http://www.51os.xyz/2017/02/04/hexo-full/</loc>
     
     <lastmod>2017-02-22T16:22:57.233Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.51os.xyz/2017/02/22/lnmp-phps/</loc>
-    
-    <lastmod>2017-02-22T16:21:33.115Z</lastmod>
     
   </url>
   
